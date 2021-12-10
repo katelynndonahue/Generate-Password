@@ -1,52 +1,61 @@
-// GIVEN I need a new, secure password
-// WHEN I click the button to generate a password
-// THEN I am presented with a series of prompts for password criteria
+// Create prompts, alerts and confirms for password criteria
 
-// Create prompts, alerts and confirms
+// Create arrays of character sets
 
-// WHEN prompted for password criteria
-// THEN I select which criteria to include in the password
-
-// Arrays of character sets
-
-// WHEN prompted for the length of the password
-// THEN I choose a length of at least 8 characters and no more than 128 characters
-
-// Prompt for character length
-
-// WHEN asked for character types to include in the password
-// THEN I confirm whether or not to include lowercase, uppercase, numeric, and/or special characters
+// Prompt for character length 8 - 128
 
 // Confirm whether or not to include lowercase, uppercase, numeric, and/or special characters
 
-// WHEN I answer each prompt
-// THEN my input should be validated and at least one character type should be selected
-
-// Answers in variables. Fires a function. If passes, continues, if fails, it stops.
-
-// WHEN all prompts are answered
-// THEN a password is generated that matches the selected criteria
+// Create answers in variables to fire a function. If it passes, function continues. If it fails, it continues to fire looking for correct response.
 
 // Prompt for acceptable criteria. Password is generated.
 
-// WHEN the password is generated
-// THEN the password is either displayed in an alert or written to the page
-
-// Password is generated. Action is complete.
+// Password is generated and diplayed in alert. Action is complete.
 
 // Assignment Code
 
 // Write password to the #password input
+
 function genPassword() {
   var numchars = "0123456789".split("")
   var lowerchars = "abcdefghijklmnopqrstuvwxyz".split("")
-  var specchars = "!@#$%^&*()".split("")
   var upperchars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ".split("");
+  var specchars = "!@#$%^&*()".split("")
   var passwordLength = 0;
   var password = "";
 
 passwordLength= prompt("Please choose a number between 8-128")
-  
+
+if (passwordLength < 8 ) {
+    passwordLength = prompt ("Incorrect password length. Try again!")
+} else if (passwordLength > 128) {
+    passwordLength = prompt ("Incorrect password length. Try again!")
+} else {
+var numconfirm = confirm ("Would you like to use numbers?");
+var lowerconfirm = confirm ("Would you like to use lowercase?");
+var upperconfirm = confirm ("Would you like to use uppercase?");
+var specconfirm = confirm ("Would you like to use special characters?");
+console.log (numconfirm, lowerconfirm, upperconfirm, specconfirm,)
+}
+
+if (numconfirm === false && lowerconfirm === false && !upperconfirm && !specconfirm) {
+alert ("Please select one character set")
+var numconfirm = confirm ("Would you like to use numbers?");
+var lowerconfirm = confirm ("Would you like to use lowercase?");
+var upperconfirm = confirm ("Would you like to use uppercase?");
+var specconfirm = confirm ("Would you like to use special characters?");
+}
+
+// Conditional logic using value of confirms
+
+    if (numconfirm) {
+        numconfirm prompt lowerconfirm;
+      } else if (lowerconfirm) {
+        lowerconfirm prompt upperconfirm;
+      } else {
+        upperconfirm prompt specconfirm;
+      }
+ 
 for (var i = 0; i <= passwordLength; i++) {
  var randomNumber = Math.floor(Math.random() * chars.length);
  password += chars.substring(randomNumber, randomNumber +1);
@@ -70,6 +79,5 @@ function writePassword() {
   passwordText.value = password;
 
 }
-
 // Add event listener to generate button
 generateBtn.addEventListener("click", genPassword);
