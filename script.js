@@ -16,56 +16,161 @@
 
 // Write password to the #password input
 
-function genPassword() {
-  var numchars = "0123456789".split("")
-  var lowerchars = "abcdefghijklmnopqrstuvwxyz".split("")
-  var upperchars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ".split("");
-  var specchars = "!@#$%^&*()".split("")
-  var passwordLength = 0;
-  var password = "";
+var specialChars = [
+  '@',
+  '%',
+  '+',
+  '\\',
+  '/',
+  "'",
+  '!',
+  '#',
+  '$',
+  '^',
+  '?',
+  ':',
+  ',',
+  ')',
+  '(',
+  '}',
+  '{',
+  ']',
+  '[',
+  '~',
+  '-',
+  '_',
+  '.',
+];
 
-passwordLength= prompt("Please choose a number between 8-128")
+var numericChars = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9'];
 
-if (passwordLength < 8 ) {
-    passwordLength = prompt ("Incorrect password length. Try again!")
-} else if (passwordLength > 128) {
-    passwordLength = prompt ("Incorrect password length. Try again!")
-} else {
-var numconfirm = confirm ("Would you like to use numbers?");
-var lowerconfirm = confirm ("Would you like to use lowercase?");
-var upperconfirm = confirm ("Would you like to use uppercase?");
-var specconfirm = confirm ("Would you like to use special characters?");
-console.log (numconfirm, lowerconfirm, upperconfirm, specconfirm,)
-}
+var lowerCasedChars = [
+  'a',
+  'b',
+  'c',
+  'd',
+  'e',
+  'f',
+  'g',
+  'h',
+  'i',
+  'j',
+  'k',
+  'l',
+  'm',
+  'n',
+  'o',
+  'p',
+  'q',
+  'r',
+  's',
+  't',
+  'u',
+  'v',
+  'w',
+  'x',
+  'y',
+  'z',
+];
 
-if (numconfirm === false && lowerconfirm === false && !upperconfirm && !specconfirm) {
-alert ("Please select one character set")
-var numconfirm = confirm ("Would you like to use numbers?");
-var lowerconfirm = confirm ("Would you like to use lowercase?");
-var upperconfirm = confirm ("Would you like to use uppercase?");
-var specconfirm = confirm ("Would you like to use special characters?");
-}
+var upperCasedChars = [
+  'A',
+  'B',
+  'C',
+  'D',
+  'E',
+  'F',
+  'G',
+  'H',
+  'I',
+  'J',
+  'K',
+  'L',
+  'M',
+  'N',
+  'O',
+  'P',
+  'Q',
+  'R',
+  'S',
+  'T',
+  'U',
+  'V',
+  'W',
+  'X',
+  'Y',
+  'Z',
+];
 
-// Conditional logic using value of confirms
-
-    if (numconfirm) {
-        numconfirm prompt lowerconfirm;
-      } else if (lowerconfirm) {
-        lowerconfirm prompt upperconfirm;
-      } else {
-        upperconfirm prompt specconfirm;
-      }
+function generatePassword() {
  
-for (var i = 0; i <= passwordLength; i++) {
- var randomNumber = Math.floor(Math.random() * chars.length);
- password += chars.substring(randomNumber, randomNumber +1);
-}
-      document.getEleme
-      function copyPassword() {
-        var copyText = document.getElementById("password");
-        copyText.select();
-        document.execCommand("copy");  
-      }ntById("password").value = password;
+  var possiblePassword = [];
+  var password = [];
+
+  var passwordLength = parseInt(prompt("Please choose a number between 8-128"));
+
+  if (passwordLength < 8 || passwordLength > 128){
+    alert("Incorrect password length. Try again!");
+    generatePassword();
+  }
+
+  
+  var numconfirm = confirm("Would you like to use numbers?");
+  var lowerconfirm = confirm("Would you like to use lowercase?");
+  var upperconfirm = confirm("Would you like to use uppercase?");
+  var specconfirm = confirm("Would you like to use special characters?");
+
+  if (
+    numconfirm === false &&
+    lowerconfirm === false &&
+    upperconfirm === false &&
+    specconfirm === false
+  ) {
+    alert("Please select one character set");
+    generatePassword();
+  }
+
+  // Conditional logic using value of confirms
+
+  if (numconfirm === true) {
+    for (var i = 0; i < passwordLength; i++) {
+      var randomIndex = Math.floor(Math.random() * numericChars.length);
+      var randomChar = numericChars[randomIndex];
+      possiblePassword.push(randomChar)
+    }
+  }
+
+  if (lowerconfirm === true) {
+    for (var i = 0; i < passwordLength; i++) {
+      var randomIndex = Math.floor(Math.random() * lowerCasedChars.length);
+      var randomChar = lowerCasedChars[randomIndex];
+      possiblePassword.push(randomChar)
+    }
+  }
+
+  if (upperconfirm === true) {
+    for (var i = 0; i < passwordLength; i++) {
+      var randomIndex = Math.floor(Math.random() * upperCasedChars.length);
+      var randomChar = upperCasedChars[randomIndex];
+      possiblePassword.push(randomChar)
+    }
+  }
+
+  if (specconfirm === true) {
+    for (var i = 0; i < passwordLength; i++) {
+      var randomIndex = Math.floor(Math.random() * specialChars.length);
+      var randomChar = specialChars[randomIndex];
+      possiblePassword.push(randomChar)
+    }
+  }
+
+  for (var i = 0; i < passwordLength; i++) {
+    var randomIndex = Math.floor(Math.random() * possiblePassword.length);
+    var randomChar = possiblePassword[randomIndex];
+    password.push(randomChar);
+  }
+
+  return password.join("");
 }
 
 // Assignment Code
@@ -77,7 +182,6 @@ function writePassword() {
   var passwordText = document.querySelector("#password");
 
   passwordText.value = password;
-
 }
 // Add event listener to generate button
-generateBtn.addEventListener("click", genPassword);
+generateBtn.addEventListener("click", writePassword);
