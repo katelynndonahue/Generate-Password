@@ -10,9 +10,9 @@ I began by creating a repository on GitHub to use as my server.
 I then worked on locally on the html, css and javascript to create an application that creates random passwords based on a given criteria.
 ## Usage
     ```md
-    ![alt text](./assets/images/generatePassword1)
+    ![Screenshot-1](./assets/images/generatePassword1)
     ```
     ```md
-    ![alt text](./assets/images/generatePassword2)
+    ![Screenshot-2](./assets/images/generatePassword2)
 ## Credits
 My tutor, Faran Navazi
